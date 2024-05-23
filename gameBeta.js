@@ -41,13 +41,24 @@ $(".btn").click( function (event) {
     userClickedPattern.push(userChosenButton);
 
     playSound(userChosenButton);
-    animatePress(userChosenButton)
+    animatePress(userChosenButton);
 
-    checkAnswer(userClickedPattern.length-1)
+    checkAnswer(userClickedPattern.length-1);
 
 });
 
 
+$(".mobileTrigger").click( function() {
+
+  if (!started) {
+
+    $("h1").text("level " + level);
+    nextSequence();
+    started = true;
+
+  }
+
+});
 
 
 $(document).keydown(function (event) {
@@ -57,6 +68,10 @@ $(document).keydown(function (event) {
       $("h1").text("level " + level);
       nextSequence();
       started = true;
+
+      $(".mobileTrigger").click(function(){
+        $(".mobileTrigger").css("display", "none");
+      });
     }
 
 });
@@ -77,6 +92,12 @@ function checkAnswer(currentLevel) {
        $("#level-title").text("Game Over, Press Any Key to Restart");
 
         startOver();
+
+        $(".mobileTrigger").text("Restart");
+
+        $(".mobileTrigger").click(function(){
+          $(".mobileTrigger").text("PRESS TO START");
+        });
 
     }
 
@@ -104,3 +125,5 @@ function startOver() {
 
 
 }
+
+
